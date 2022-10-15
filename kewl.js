@@ -12,15 +12,17 @@ let eight = document.getElementById('8');
 let nine = document.getElementById('9');
 let plus = document.getElementById('+');
 let minus = document.getElementById('-');
-let equal = document.getElementById('=');
-let dot = document.getElementById('.');
+let equal = document.getElementById('equal');
+let dot = document.getElementById('dot');
+let multiply = document.getElementById('multiply');
+let divide = document.getElementById('divide');
 let clearBtn = document.getElementById('clear');
 
 //let nums = [zero, one, two, three, four, five, six, seven, eight, nine]
 
 // aux variables
 let currentDisplay = '';
-let storedValues = [];
+let storedValue = 0;
 let operation;  // 0=sum, 1=substract, 2=multiply, 3=divide
 let result = 0;
 
@@ -71,7 +73,7 @@ function displayDot() {
 }
 function clearDisplay() {
     currentDisplay = '';
-    //storedValues = [];
+    //storedValues = [];    // on array branch broke everything. Gotta fix that!
     display.value = currentDisplay;
 }
 
@@ -89,28 +91,37 @@ nine.addEventListener('click', displayNine);
 dot.addEventListener('click', displayDot);
 clearBtn.addEventListener('click', clearDisplay);
 plus.addEventListener('click', plusFunc);
-// minus.addEventListener('click', minusFunc);
-equal.addEventListener('click', equalFunc);
+minus.addEventListener('click', minusFunc);
+multiply.addEventListener('click', multiplyFunc);
+divide.addEventListener('click', divideFunc);
+// equal.addEventListener('click', equalFunc);
 
 // operation functions
+
+// operating only work continously for the same operation.
+// first line of operation function forces to loop.
+// maybe could operation button asigns operation variable and number-btns &| equal-btns trigger operation? 
 function plusFunc() {
-    storedValues.push(parseFloat(currentDisplay));  // store displayed number to nums
+    storedValue += parseFloat(currentDisplay);  // operate stored number & current number
     clearDisplay();
-    display.placeholder = storedValues[storedValues.length - 1];    // displays last input greyed out
-    operation = 0;  // 
+    display.placeholder = storedValue;    // displays result greyed out
+
 }
+function minusFunc() {
+    storedValue -= parseFloat(currentDisplay);  // operate stored number & current number
+    clearDisplay();
+    display.placeholder = storedValue;    // displays result greyed out
 
-function equalFunc() {
-    switch (operation) {
-        case 0:
-            storedValues.push(parseFloat(currentDisplay));
-            console.log(storedValues);
-            for (let x of storedValues) {
-
-                result += x;
-            }
-            display.value = result;
-            break;
-    }
 }
+function multiplyFunc() {
+    storedValue *= parseFloat(currentDisplay);  // operate stored number & current number
+    clearDisplay();
+    display.placeholder = storedValue;    // displays result greyed out
 
+}
+function divideFunc() {
+    storedValue /= parseFloat(currentDisplay); // operate stored number & current number
+    clearDisplay();
+    display.placeholder = storedValue;    // displays result greyed out
+
+}
