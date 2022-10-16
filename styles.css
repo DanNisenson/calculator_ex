@@ -68,7 +68,6 @@
   main {
     display: flex;
     max-height: 50vh;
-    /* width: 50vh; */
     justify-content: center;
     align-items: center;
     flex-direction: column;

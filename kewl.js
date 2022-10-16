@@ -23,7 +23,7 @@ let clearBtn = document.getElementById('clear');
 // aux variables
 let currentDisplay = '';
 let storedValue = 0;
-let operation;  // 0=sum, 1=substract, 2=multiply, 3=divide
+let operation = -1;  // -1=blank 0=sum, 1=substract, 2=multiply, 3=divide
 let result = 0;
 
 // functiones for storing and displaying typed number
@@ -73,9 +73,16 @@ function displayDot() {
 }
 function clearDisplay() {
     currentDisplay = '';
-    //storedValues = [];    // on array branch broke everything. Gotta fix that!
     display.value = currentDisplay;
 }
+function reset() {
+    currentDisplay = '';
+    storedValue = 0;
+    operation = -1;
+    display.value = currentDisplay;
+    display.placeholder = currentDisplay;
+}
+
 
 // adding click events to buttons
 zero.addEventListener('click', displayZero);
@@ -94,34 +101,55 @@ plus.addEventListener('click', plusFunc);
 minus.addEventListener('click', minusFunc);
 multiply.addEventListener('click', multiplyFunc);
 divide.addEventListener('click', divideFunc);
-// equal.addEventListener('click', equalFunc);
+equal.addEventListener('click', equalFunc);
+clearBtn.addEventListener('click', reset);
 
 // operation functions
-
-// operating only work continously for the same operation.
-// first line of operation function forces to loop.
-// maybe could operation button asigns operation variable and number-btns &| equal-btns trigger operation? 
 function plusFunc() {
-    storedValue += parseFloat(currentDisplay);  // operate stored number & current number
-    clearDisplay();
+    operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);  // first time: stores displayed number. second time: operates and stores result
+    operation = 0;                        // stores operation TO BE MADE
     display.placeholder = storedValue;    // displays result greyed out
-
+    clearDisplay();                       // clears user input
 }
 function minusFunc() {
-    storedValue -= parseFloat(currentDisplay);  // operate stored number & current number
+    operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);
+    operation = 1;
+    display.placeholder = storedValue;
     clearDisplay();
-    display.placeholder = storedValue;    // displays result greyed out
-
 }
 function multiplyFunc() {
-    storedValue *= parseFloat(currentDisplay);  // operate stored number & current number
+    operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);
+    operation = 2;
+    display.placeholder = storedValue;
     clearDisplay();
-    display.placeholder = storedValue;    // displays result greyed out
-
 }
 function divideFunc() {
-    storedValue /= parseFloat(currentDisplay); // operate stored number & current number
+    operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);
+    operation = 3;
+    display.placeholder = storedValue;
     clearDisplay();
-    display.placeholder = storedValue;    // displays result greyed out
+}
+function equalFunc() {
+    storedValue = operate(operation);   // operates and stores result
+    clearDisplay();
+    display.placeholder = storedValue;        // displays result
+}
+
+
+function operate(op) {      // operates according to stored operation variable
+    switch (op) {
+        case 0:
+            return storedValue + parseFloat(currentDisplay);
+            break;
+        case 1:
+            return storedValue - parseFloat(currentDisplay);
+            break;
+        case 2:
+            return storedValue * parseFloat(currentDisplay);
+            break;
+        case 3:
+            return storedValue / parseFloat(currentDisplay);
+            break;
+    }
 
 }
