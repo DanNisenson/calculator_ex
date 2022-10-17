@@ -107,7 +107,7 @@ clearBtn.addEventListener('click', reset);
 // operation functions
 function plusFunc() {
     operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);  // first time: stores displayed number. second time: operates and stores result
-    operation = 0;                        // stores operation TO BE MADE
+    operation = 0;                        // stores operation type TO BE MADE
     display.placeholder = storedValue;    // displays result greyed out
     clearDisplay();                       // clears user input
 }
@@ -140,6 +140,7 @@ function operate(op) {      // operates according to stored operation variable
     switch (op) {
         case 0:
             return storedValue + parseFloat(currentDisplay);
+            console.log(currentDisplay);
             break;
         case 1:
             return storedValue - parseFloat(currentDisplay);
