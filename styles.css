@@ -67,6 +67,7 @@ main {
 
 #display {
   margin: 0 10px 15px 10px;
+  padding: 0 10px;
   text-align: end;
   min-width: 100%;
   background-color: #aaab83;

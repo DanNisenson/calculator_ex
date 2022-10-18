@@ -105,8 +105,15 @@ equal.addEventListener('click', equalFunc);
 clearBtn.addEventListener('click', reset);
 
 // operation functions
+
+// SUM WORKS RIGHT !! too much repeated code ? place if else if in operation. 
+// can make generic operationButton(thisOperation + - * /) ? can call arguments in function on event ?
 function plusFunc() {
-    operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);  // first time: stores displayed number. second time: operates and stores result
+    if (operation == -1) {      // first time: stores displayed number. second time: operates and stores result
+        storedValue = parseFloat(currentDisplay);
+    } else if (currentDisplay != '') { 
+        storedValue = operate(operation);
+    }  
     operation = 0;                        // stores operation type TO BE MADE
     display.placeholder = storedValue;    // displays result greyed out
     clearDisplay();                       // clears user input
@@ -137,20 +144,14 @@ function equalFunc() {
 
 
 function operate(op) {      // operates according to stored operation variable
-    switch (op) {
-        case 0:
-            return storedValue + parseFloat(currentDisplay);
-            console.log(currentDisplay);
-            break;
-        case 1:
-            return storedValue - parseFloat(currentDisplay);
-            break;
-        case 2:
-            return storedValue * parseFloat(currentDisplay);
-            break;
-        case 3:
-            return storedValue / parseFloat(currentDisplay);
-            break;
-    }
-
+        switch (op) {
+            case 0:
+                return storedValue + parseFloat(currentDisplay);
+            case 1:
+                return storedValue - parseFloat(currentDisplay);
+            case 2:
+                return storedValue * parseFloat(currentDisplay);
+            case 3:
+                return storedValue / parseFloat(currentDisplay);
+        }
 }
