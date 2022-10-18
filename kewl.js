@@ -18,8 +18,6 @@ let multiply = document.getElementById('multiply');
 let divide = document.getElementById('divide');
 let clearBtn = document.getElementById('clear');
 
-//let nums = [zero, one, two, three, four, five, six, seven, eight, nine]
-
 // aux variables
 let currentDisplay = '';
 let storedValue = 0;
@@ -106,52 +104,55 @@ clearBtn.addEventListener('click', reset);
 
 // operation functions
 
-// SUM WORKS RIGHT !! too much repeated code ? place if else if in operation. 
 // can make generic operationButton(thisOperation + - * /) ? can call arguments in function on event ?
 function plusFunc() {
-    if (operation == -1) {      // first time: stores displayed number. second time: operates and stores result
-        storedValue = parseFloat(currentDisplay);
-    } else if (currentDisplay != '') { 
-        storedValue = operate(operation);
-    }  
+    operate(operation);
     operation = 0;                        // stores operation type TO BE MADE
     display.placeholder = storedValue;    // displays result greyed out
     clearDisplay();                       // clears user input
 }
 function minusFunc() {
-    operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);
+    operate(operation);
     operation = 1;
     display.placeholder = storedValue;
     clearDisplay();
 }
 function multiplyFunc() {
-    operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);
+    operate(operation);
     operation = 2;
     display.placeholder = storedValue;
     clearDisplay();
 }
 function divideFunc() {
-    operation == -1 ? storedValue = parseFloat(currentDisplay) : storedValue = operate(operation);
+    operate(operation);
     operation = 3;
     display.placeholder = storedValue;
     clearDisplay();
 }
 function equalFunc() {
-    storedValue = operate(operation);   // operates and stores result
+    operate(operation);
     clearDisplay();
     display.placeholder = storedValue;        // displays result
 }
 
 
-function operate(op) {      // operates according to stored operation variable
+function operate(op) {                      // operates according to stored operation variable
+    if (operation == -1) {                  // 1st operation: stores displayed number. 
+        storedValue = parseFloat(currentDisplay);
+    } else if (currentDisplay != '') {      // following operations: operates and stores result
         switch (op) {
             case 0:
-                return storedValue + parseFloat(currentDisplay);
+                storedValue += parseFloat(currentDisplay);
+                break;
             case 1:
-                return storedValue - parseFloat(currentDisplay);
+                storedValue -= parseFloat(currentDisplay);
+                break;
             case 2:
-                return storedValue * parseFloat(currentDisplay);
+                storedValue *= parseFloat(currentDisplay);
+                break;
             case 3:
-                return storedValue / parseFloat(currentDisplay);
+                storedValue /= parseFloat(currentDisplay);
+                break;
         }
+    }
 }
