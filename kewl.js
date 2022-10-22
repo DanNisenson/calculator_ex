@@ -24,6 +24,26 @@ let storedValue = 0;
 let operation = -1;  // -1=blank 0=sum, 1=substract, 2=multiply, 3=divide
 let result = 0;
 
+// adding click events to buttons
+zero.addEventListener('click', displayZero);
+one.addEventListener('click', displayOne);
+two.addEventListener('click', displayTwo);
+three.addEventListener('click', displayThree);
+four.addEventListener('click', displayFour);
+five.addEventListener('click', displayFive);
+six.addEventListener('click', displaySix);
+seven.addEventListener('click', displaySeven);
+eight.addEventListener('click', displayEight);
+nine.addEventListener('click', displayNine);
+dot.addEventListener('click', displayDot);
+clearBtn.addEventListener('click', clearDisplay);
+plus.addEventListener('click', plusFunc);
+minus.addEventListener('click', minusFunc);
+multiply.addEventListener('click', multiplyFunc);
+divide.addEventListener('click', divideFunc);
+equal.addEventListener('click', equalFunc);
+clearBtn.addEventListener('click', reset);
+
 // functiones for storing and displaying typed number
 function displayZero() {
     currentDisplay += '0';
@@ -82,25 +102,6 @@ function reset() {
 }
 
 
-// adding click events to buttons
-zero.addEventListener('click', displayZero);
-one.addEventListener('click', displayOne);
-two.addEventListener('click', displayTwo);
-three.addEventListener('click', displayThree);
-four.addEventListener('click', displayFour);
-five.addEventListener('click', displayFive);
-six.addEventListener('click', displaySix);
-seven.addEventListener('click', displaySeven);
-eight.addEventListener('click', displayEight);
-nine.addEventListener('click', displayNine);
-dot.addEventListener('click', displayDot);
-clearBtn.addEventListener('click', clearDisplay);
-plus.addEventListener('click', plusFunc);
-minus.addEventListener('click', minusFunc);
-multiply.addEventListener('click', multiplyFunc);
-divide.addEventListener('click', divideFunc);
-equal.addEventListener('click', equalFunc);
-clearBtn.addEventListener('click', reset);
 
 // operation functions
 
