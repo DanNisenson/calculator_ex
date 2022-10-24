@@ -105,7 +105,6 @@ function reset() {
 
 // operation functions
 
-// can make generic operationButton(thisOperation + - * /) ? can call arguments in function on event ?
 function plusFunc() {
     operate(operation);
     operation = 0;                        // stores operation type TO BE MADE
